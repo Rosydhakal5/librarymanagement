@@ -26,7 +26,7 @@ const AdminSignup = () => {
    <h1>Admin Signup </h1> 
    <Form>
     {inputs.map(input => (
-        <CustomInput key= {input.name} label = {input.label} placeholder ={input.placeholder} type={input.type}/>
+        <CustomInput key= {input.name} label = {input.label} placeholder ={input.placeholder} {...input}/>
     ))}
     <Button variant="primary" type="submit">
         Submit
