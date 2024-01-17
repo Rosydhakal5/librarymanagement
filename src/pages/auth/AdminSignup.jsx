@@ -2,8 +2,8 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from '../../component/layout/Header'
-import Footer from '../../component/layout/Footer'
+// import Header from '../../component/layout/Header'
+// import Footer from '../../component/layout/Footer'
 import Baselayout from '../../component/Baselayout'
 import CustomInput from '../../component/customInput/customInput';
 // import CustomInput from '../../component/customInput/customInput'
