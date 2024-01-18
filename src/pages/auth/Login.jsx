@@ -24,7 +24,7 @@ const Login = () => {
           <CustomInput key= {input.name} label = {input.label} placeholder ={input.placeholder} {...input}/>
       ))}
       <Button variant="primary" type="submit">
-          Submit
+          Login
       </Button>
       </Form>
       </div>
