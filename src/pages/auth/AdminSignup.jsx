@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,14 +20,28 @@ const inputs = [
 ]
 
 const AdminSignup = () => {
+  const [formData, setFormData] = useState({});
+
+  const handleChange = (e) => {
+    const {name, value } = e.target;
+    setFormData({
+      ...formData, 
+      [name]:value});
+  }
+
+  const handleSubmit = (e)=> {
+    e.preventDefault();
+    console.log("submitted", formData)
+
+  }
   return (
     <>
    <Baselayout >
     <div className = "p-3 border shadow rounded admin-form"> 
    <h1>Admin Signup </h1> 
-   <Form>
+   <Form  onSubmit={handleSubmit}>
     {inputs.map(input => (
-        <CustomInput key= {input.name} label = {input.label} placeholder ={input.placeholder} {...input}/>
+        <CustomInput key= {input.name} label = {input.label} placeholder ={input.placeholder} {...input} onChange = {handleChange}/>
     ))}
     <Button variant="primary" type="submit">
         Submit
