@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import Footer from '../../component/layout/Footer'
 import Baselayout from '../../component/Baselayout'
 import CustomInput from '../../component/customInput/customInput';
+import { toast } from 'react-toastify';
+
 // import CustomInput from '../../component/customInput/customInput'
 
 const inputs = [
@@ -31,7 +33,7 @@ const AdminSignup = () => {
 
   const handleSubmit = (e)=> {
     e.preventDefault();
-    console.log("submitted", formData)
+    toast("submitted", formData)
 
   }
   return (
