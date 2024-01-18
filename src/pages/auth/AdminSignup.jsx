@@ -17,7 +17,7 @@ const inputs = [
     {name: "phone", label: "Phone", placeholder: "Enter Phone Number", type:"number", required: true},
     {name: "email", label: "Email", placeholder: "Enter Email", type:"email", required: true},
     {name: "password", label: "Password", placeholder: "*********", type:"password", required: true},
-    {name: "confirmPassword", label: "Confirm Password", placeholder: "*********", type:"password", required: true},
+    {name: "confirmPassword", label: "Confirm Password", placeholder: "*********", type:"password", required: true, minLength: 6},
 
 ]
 
