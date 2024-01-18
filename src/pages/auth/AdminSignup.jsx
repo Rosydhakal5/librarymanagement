@@ -33,6 +33,11 @@ const AdminSignup = () => {
 
   const handleSubmit = (e)=> {
     e.preventDefault();
+
+    const {password, confirmPassword} = formData;
+    if(password != confirmPassword){
+      return toast.error("Password didn't match!")
+    }
     toast("submitted", formData)
 
   }
