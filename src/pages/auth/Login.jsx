@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { auth } from '../../firebase-config';
 
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const inputs = [
   {name: "email", label: "Username / Email", placeholder: "Enter your email/username.... ", type: "email", required: true },
@@ -18,6 +19,7 @@ const inputs = [
 ]
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const handleChange = (e) => {
     const {name, value } = e.target;
@@ -37,6 +39,7 @@ const Login = () => {
       });
       const userCredential = await signInPromise;
       console.log(userCredential.user);
+      navigate('/dashboard');
       toast("YAY logged in..🥳")
     
     } catch (error) {
