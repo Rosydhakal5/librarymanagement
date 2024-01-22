@@ -7,9 +7,12 @@ import Header from '../../component/layout/Header'
 import CustomInput from '../../component/customInput/customInput';
 import Baselayout from '../../component/Baselayout'
 import { toast } from 'react-toastify';
+import { auth } from '../../firebase-config';
+
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const inputs = [
-  {name: "fname", label: "Username / Email", placeholder: "Enter your email/username.... ", type: "email", required: true },
+  {name: "email", label: "Username / Email", placeholder: "Enter your email/username.... ", type: "email", required: true },
   {name: "password", label: "password", placeholder: "Enter your password.... ", type: "password", required: true }
 
 ]
@@ -25,7 +28,25 @@ const Login = () => {
 
   const handleSubmit = (e)=> {
     e.preventDefault();
-    toast("submitted", formData)
+
+    const {email, password} =formData;
+    console.log(formData);
+    console.log(email, password);
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+    toast("Logged in")
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if(errorCode.includes("auth/invalid-credential")){
+      toast.error("Invalid email or password")
+    }
+  });
 
   }
   return (
