@@ -11,6 +11,7 @@ import { auth } from '../../firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { setUserInfo } from '../../redux/authSlice';
 
 const inputs = [
   {name: "email", label: "Username / Email", placeholder: "Enter your email/username.... ", type: "email", required: true },
@@ -40,6 +41,7 @@ const Login = () => {
         pending: "In progress...."
       });
       const userCredential = await signInPromise;
+      dispatch(setUserInfo(userCredential.user))
       console.log(userCredential.user);
       toast("YAY logged in..🥳")
     
@@ -56,7 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo.uid){
-      navigate("/dasboard")
+      navigate("/dashboard")
     }
   }, [userInfo])
   return (
