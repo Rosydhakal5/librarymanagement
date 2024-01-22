@@ -49,7 +49,7 @@ const AdminSignup = () => {
     toast.promise(signupPromise,{
       pending: "In Progress..."
     });
-    try{
+    try{ 
       const userCredential = await signupPromise;
       console.log(userCredential.user);
       const uid = userCredential.user.uid;
