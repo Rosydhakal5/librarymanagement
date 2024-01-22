@@ -26,28 +26,28 @@ const Login = () => {
       [name]:value});
   }
 
-  const handleSubmit = (e)=> {
+  const handleSubmit = async(e)=> {
     e.preventDefault();
 
     const {email, password} =formData;
+    try {
+      const signInPromise = signInWithEmailAndPassword(auth, email, password)
+      toast.promise(signInPromise, {
+        pending: "In progress...."
+      });
+      const userCredential = await signInPromise;
+      console.log(userCredential.user);
+      toast("YAY logged in..🥳")
+    
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if(errorCode.includes("auth/invalid-credential")){
+        toast.error("Invalid email or password")
+      }
+    }
     console.log(formData);
     console.log(email, password);
-    signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user)
-    toast("Logged in")
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    if(errorCode.includes("auth/invalid-credential")){
-      toast.error("Invalid email or password")
-    }
-  });
-
   }
   return (
     <>
