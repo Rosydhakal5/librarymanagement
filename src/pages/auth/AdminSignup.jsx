@@ -9,7 +9,10 @@ import Baselayout from '../../component/Baselayout'
 import CustomInput from '../../component/customInput/customInput';
 import { toast } from 'react-toastify';
 import { createUserWithEmailAndPassword  } from 'firebase/auth';
-import { auth } from '../../firebase-config';
+import { auth,db } from '../../firebase-config';
+import { doc, setDoc } from "firebase/firestore"; 
+import { useNavigate } from 'react-router-dom';
+
 
 // import CustomInput from '../../component/customInput/customInput'
 
@@ -24,6 +27,7 @@ const inputs = [
 ]
 
 const AdminSignup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
@@ -36,18 +40,25 @@ const AdminSignup = () => {
   const handleSubmit = async(e)=> {
     e.preventDefault();
 
-    const {email, password, confirmPassword} = formData;
+    const  {password, confirmPassword, ...restFormData} = formData;
+
     if(password != confirmPassword){
       return toast.error("Password didn't match!")
     };
-    const signupPromise = createUserWithEmailAndPassword(auth, email, password)
+    const signupPromise = createUserWithEmailAndPassword(auth, formData.email, password)
     toast.promise(signupPromise,{
       pending: "In Progress..."
     });
     try{
       const userCredential = await signupPromise;
       console.log(userCredential.user);
+      const uid = userCredential.user.uid;
+      await setDoc(doc(db, "users", uid),{
+        ...restFormData,
+        uid
+      })
       toast("user created sucessfully");
+      navigate("./login")
     } catch (error){
       const errorCode= error.code;
         if(errorCode.includes("auth/email-already-in-use")){
