@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from '../../component/layout/Footer'
 import Header from '../../component/layout/Header'
 import CustomInput from '../../component/customInput/customInput';
-import Baselayout from '../../component/Baselayout'
+import Baselayout from '../../component/layout/Baselayout'
 import { toast } from 'react-toastify';
 
 const inputs = [

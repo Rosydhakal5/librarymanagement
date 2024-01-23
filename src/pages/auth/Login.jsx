@@ -3,14 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomInput from '../../component/customInput/customInput';
-import Baselayout from '../../component/Baselayout'
+import Baselayout from '../../component/layout/Baselayout'
 import { toast } from 'react-toastify';
 import { auth, db } from '../../firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserInfo } from '../../redux/authSlice';
-import { doc, getDoc } from 'firebase/firestore';
+import { getUserInfoAction } from '../../redux/authAction';
+
 
 
 const inputs = [
@@ -42,17 +42,9 @@ const Login = () => {
       });
       const userCredential = await signInPromise;
       const { user } = userCredential;
+      dispatch(getUserInfoAction(user.uid))
+      toast("YAY logged in..🥳")
 
-
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const userData = docSnap.data();
-        dispatch(setUserInfo(userData));
-        toast("YAY logged in..🥳")
-      } else {
-        toast.error("No such document!");
-      }
     } catch (e) {
       const errorCode = e.code;
       if(errorCode.includes("auth/invalid-credential")){
