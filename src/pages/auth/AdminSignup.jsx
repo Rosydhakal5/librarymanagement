@@ -58,7 +58,7 @@ const AdminSignup = () => {
         uid
       })
       toast("user created sucessfully");
-      navigate("./login")
+      navigate("/login")
     } catch (error){
       const errorCode= error.code;
         if(errorCode.includes("auth/email-already-in-use")){

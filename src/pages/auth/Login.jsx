@@ -5,11 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CustomInput from '../../component/customInput/customInput';
 import Baselayout from '../../component/Baselayout'
 import { toast } from 'react-toastify';
-import { auth } from '../../firebase-config';
+import { auth, db } from '../../firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserInfo } from '../../redux/authSlice';
+import { doc, getDoc } from 'firebase/firestore';
 
 
 const inputs = [
@@ -40,19 +41,24 @@ const Login = () => {
         pending: "In progress...."
       });
       const userCredential = await signInPromise;
-      dispatch(setUserInfo(userCredential.user))
-      console.log(userCredential.user);
-      toast("YAY logged in..🥳")
-    
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      const { user } = userCredential;
+
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        dispatch(setUserInfo(userData));
+        toast("YAY logged in..🥳")
+      } else {
+        toast.error("No such document!");
+      }
+    } catch (e) {
+      const errorCode = e.code;
       if(errorCode.includes("auth/invalid-credential")){
         toast.error("Invalid email or password")
       }
     }
-    console.log(formData);
-    console.log(email, password);
   }
 
   useEffect(() => {
