@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Dashboard from '../../pages/Dashboard/dashboard'
+// import Dashboard from '../../pages/Dashboard/dashboard'
 import { useSelector } from 'react-redux'
 
 const Sidebar = () => {

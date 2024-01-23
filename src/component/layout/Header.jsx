@@ -28,8 +28,6 @@ const Header = () => {
                 <Link to = "/admin-signup" className='nav-link'>Signup</Link>
                 {userInfo.uid?(<Link to = "#" onClick={handleLogout} className='nav-link'>Log out</Link>):
                 (<Link to = "/login" className='nav-link'>Login</Link>)}
-                
-                
             </Nav>
             </Navbar.Collapse>
         </Container>
