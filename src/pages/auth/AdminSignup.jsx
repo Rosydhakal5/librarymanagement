@@ -3,8 +3,6 @@ import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Header from '../../component/layout/Header'
-// import Footer from '../../component/layout/Footer'
 import Baselayout from '../../component/layout/Baselayout'
 import CustomInput from '../../component/customInput/customInput';
 import { toast } from 'react-toastify';
@@ -12,9 +10,6 @@ import { createUserWithEmailAndPassword  } from 'firebase/auth';
 import { auth,db } from '../../firebase-config';
 import { doc, setDoc } from "firebase/firestore"; 
 import { useNavigate } from 'react-router-dom';
-
-
-// import CustomInput from '../../component/customInput/customInput'
 
 const inputs = [
     {name: "fName", label: "First Name", placeholder: "Enter first Name", type:"text", required: true},
