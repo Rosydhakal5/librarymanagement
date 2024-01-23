@@ -10,8 +10,8 @@ import ResetPassword from './pages/auth/ResetPassword'
 import AddBook from './pages/books/AddBook'
 import Books from './pages/books/Books'
 import EditBook from './pages/books/EditBook'
-import Dashboard from './pages/dashboard/Dashboard'
-
+import Dashboard from './pages/Dashboard/dashboard';
+// import Dashboard from './pages/dashboard/Dashboard'
 
 
 

@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from '../../component/layout/Footer'
-import Header from '../../component/layout/Header'
 import CustomInput from '../../component/customInput/customInput';
 import Baselayout from '../../component/Baselayout'
 import { toast } from 'react-toastify';
@@ -12,6 +10,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserInfo } from '../../redux/authSlice';
+
 
 const inputs = [
   {name: "email", label: "Username / Email", placeholder: "Enter your email/username.... ", type: "email", required: true },
