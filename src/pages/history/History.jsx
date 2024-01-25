@@ -2,7 +2,9 @@ import React from 'react'
 
 const History = () => {
   return (
-    <div>History</div>
+    <AdminLayout title={History}>
+      History component 
+      </AdminLayout>
   )
 }
 
