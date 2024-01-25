@@ -7,7 +7,7 @@ import Baselayout from '../../component/layout/Baselayout'
 import { toast } from 'react-toastify';
 import { auth, db } from '../../firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfoAction } from '../../redux/authAction';
 
@@ -71,6 +71,7 @@ const Login = () => {
           Login
       </Button>
       </Form>
+      Forget Password? <Link to={"/reset-password"}>Reset Password </Link>
       </div>
     </Baselayout>
     </>
