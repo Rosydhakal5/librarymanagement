@@ -3,7 +3,11 @@ import AdminLayout from '../../component/layout/AdminLayout'
 
 const Dashboard = () => {
   return (
-    <AdminLayout />
+    <AdminLayout title={Dashboard}>
+      <div>
+        Dashboard Component 
+      </div>
+    </AdminLayout>
     
   )}
 
