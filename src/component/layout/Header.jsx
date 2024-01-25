@@ -2,16 +2,18 @@ import { signOut } from 'firebase/auth';
 import React from 'react'
 import { Container, NavDropdown, Nav, Navbar } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import {Link} from  "react-router-dom"
+import {Link, useNavigate} from  "react-router-dom"
 import { auth } from '../../firebase-config';
 import { setUserInfo } from '../../redux/authSlice';
 
 const Header = () => {
   const {userInfo} = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogout = () =>{
     signOut(auth).then(() =>{
       dispatch(setUserInfo({}));
+      navigate("./login")
     }).catch((error)=> {
       console.log(error)
     })
