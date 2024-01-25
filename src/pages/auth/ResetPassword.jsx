@@ -2,14 +2,16 @@ import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from '../../component/layout/Footer'
-import Header from '../../component/layout/Header'
+
 import CustomInput from '../../component/customInput/customInput';
 import Baselayout from '../../component/layout/Baselayout'
 import { toast } from 'react-toastify';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../firebase-config';
+import { Link } from 'react-router-dom';
 
 const inputs = [
-  {name: "fname", label: "", placeholder: "Enter your email/username to reset .... ", type: "email", required: true },
+  {name: "email", label: "email", placeholder: "Enter your email/username to reset .... ", type: "email", required: true },
 
 ]
 
@@ -24,7 +26,17 @@ const ResetPassword = () => {
 
   const handleSubmit = (e)=> {
     e.preventDefault();
-    toast("Reset Link has been sent", formData)
+    const {email} = formData;
+    console.log(email)
+    sendPasswordResetEmail(auth, email)
+    
+    .then(() => {
+      toast("Reset Link has been sent", formData)
+    })
+    .catch((error)=>{
+      const errorMessage = error.message;
+      toast.error("Something went wrong", errorMessage)
+    }) 
 
   }
   return (
@@ -40,6 +52,7 @@ const ResetPassword = () => {
           Reset
       </Button>
       </Form>
+      Go Back to <Link to={"/login"}> Login </Link>
       </div>
     </Baselayout>
     </>
